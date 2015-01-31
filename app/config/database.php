@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
+			'host'      => '85.25.248.52',
+			'database'  => 'hackatron',
+			'username'  => 'hackatron',
+			'password'  => 'h4ck4tr0n',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -114,9 +114,9 @@ return array(
 		'cluster' => false,
 
 		'default' => array(
-			'host'     => '127.0.0.1',
+			'host'     => '85.25.248.52',
 			'port'     => 6379,
-			'database' => 0,
+			'database' => 13,
 		),
 
 	),
