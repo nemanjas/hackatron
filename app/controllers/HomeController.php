@@ -12,12 +12,17 @@ class HomeController extends BaseController {
 	| get you started. To route to this controller, just add the route:
 	|
 	|	Route::get('/', 'HomeController@showWelcome');
+        |       Route::get('/testme', 'HomeController@testme');
 	|
 	*/
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+          die('sdsadad');
 	}
+        
+        public function Testme(){
+            die('asdad');
+        }
 
 }
