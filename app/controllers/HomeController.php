@@ -26,5 +26,18 @@ class HomeController extends BaseController {
             }
         }
     }
+    
+    public function GetData(){
+        
+        $input = Input::all();
+        
+        if(isset($input['id'])){
+            echo Response::json(array('success'=>true,Prijave::find((int)$input['id'])));
+        }else if(isset($input['all'])){
+            echo Response::json(array('success'=>true,Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
+        }
+        
+        
+    }
 
 }
