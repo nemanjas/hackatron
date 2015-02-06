@@ -14,7 +14,7 @@ class HomeController extends BaseController {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            echo Response::json(array('success'=>false,'data'=>$validator->messages()));
+            return Response::json(array('success'=>false,'data'=>$validator->messages()));
         }else{
             $input = Input::all();
             $prijaveModel = new Prijave;
@@ -23,7 +23,7 @@ class HomeController extends BaseController {
             $prijaveModel->email = $input['email'];
             $prijaveModel->client_id = Authorizer::getResourceOwnerId();
             if($prijaveModel->save()){
-                echo Response::json(array('success'=>true,'id'=>$prijaveModel->id));
+                return Response::json(array('success'=>true,'id'=>$prijaveModel->id));
             }
         }
     }
@@ -33,9 +33,9 @@ class HomeController extends BaseController {
         $input = Input::all();
         
         if(isset($input['id'])){
-            echo Response::json(array('success'=>true,'data'=>Prijave::find((int)$input['id'])));
+            return Response::json(array('success'=>true,'data'=>Prijave::find((int)$input['id'])));
         }else if(isset($input['all'])){
-            echo Response::json(array('success'=>true,'data'=>Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
+            return Response::json(array('success'=>true,'data'=>Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
         }
         
         
@@ -48,7 +48,7 @@ class HomeController extends BaseController {
         if(isset($input['id'])){
             $prijava = Prijave::find((int)$input['id']);
             if($prijava == null){
-                echo Response::json(array('success'=>false,'data'=>'ID not found'));
+                return Response::json(array('success'=>false,'data'=>'ID not found'));
                 exit;
             }
             if(isset($input['data'])){
@@ -59,12 +59,12 @@ class HomeController extends BaseController {
             }
             
             if($prijava->save()){
-                echo Response::json(array('success'=>true,'data'=>$prijava));
+                return Response::json(array('success'=>true,'data'=>$prijava));
             }else{
-                echo Response::json(array('success'=>false,'data'=>'Unable to Update'));
+                return Response::json(array('success'=>false,'data'=>'Unable to Update'));
             }
         }else{
-            echo Response::json(array('success'=>false,'data'=>'Please send ID'));
+            return Response::json(array('success'=>false,'data'=>'Please send ID'));
         }
     }
 
