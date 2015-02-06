@@ -17,7 +17,7 @@ Route::get('/', function()
 });
 
 
-Route::post('put', ['before' => 'oauth','uses' => 'HomeController@Testme']);
+Route::post('insert', ['before' => 'oauth','uses' => 'HomeController@Insert']);
 
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());

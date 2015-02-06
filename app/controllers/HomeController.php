@@ -2,7 +2,7 @@
 
 class HomeController extends BaseController {
 
-    public function Testme() {
+    public function Insert() {
 
         $rules = array(
             'data' => 'required',
@@ -21,7 +21,9 @@ class HomeController extends BaseController {
             $prijaveModel->data = $input['data'];
             $prijaveModel->email = $input['email'];
             $prijaveModel->client_id = Authorizer::getResourceOwnerId();
-            var_dump($prijaveModel->save());
+            if($prijaveModel->save()){
+                echo Response::json(array('success'=>true,'id'=>$prijaveModel->id));
+            }
         }
     }
 
