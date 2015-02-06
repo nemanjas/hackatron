@@ -19,7 +19,7 @@ class HomeController extends BaseController {
             $input = Input::all();
             $prijaveModel = new Prijave;
             $prijaveModel->status = (int)$input['status'];
-            $prijaveModel->data = $input['data'];
+            $prijaveModel->data = json_encode($input['data']);
             $prijaveModel->email = $input['email'];
             $prijaveModel->client_id = Authorizer::getResourceOwnerId();
             if($prijaveModel->save()){
