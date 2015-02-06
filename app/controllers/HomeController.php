@@ -13,7 +13,7 @@ class HomeController extends BaseController {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            echo Response::json(array('error'=>true,$validator->messages()));
+            echo Response::json(array('success'=>false,'data'=>$validator->messages()));
         }else{
             $input = Input::all();
             $prijaveModel = new Prijave;
