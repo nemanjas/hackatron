@@ -32,9 +32,9 @@ class HomeController extends BaseController {
         $input = Input::all();
         
         if(isset($input['id'])){
-            echo Response::json(array('success'=>true,Prijave::find((int)$input['id'])));
+            echo Response::json(array('success'=>true,'data'=>Prijave::find((int)$input['id'])));
         }else if(isset($input['all'])){
-            echo Response::json(array('success'=>true,Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
+            echo Response::json(array('success'=>true,'data'=>Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
         }
         
         
