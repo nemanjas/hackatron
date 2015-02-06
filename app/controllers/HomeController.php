@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 class HomeController extends BaseController {
 
     public function Insert() {
@@ -19,7 +20,7 @@ class HomeController extends BaseController {
             $input = Input::all();
             $prijaveModel = new Prijave;
             $prijaveModel->status = (int)$input['status'];
-            $prijaveModel->data = json_encode($input['data']);
+            $prijaveModel->data = $input['data'];
             $prijaveModel->email = $input['email'];
             $prijaveModel->client_id = Authorizer::getResourceOwnerId();
             if($prijaveModel->save()){
@@ -33,9 +34,20 @@ class HomeController extends BaseController {
         $input = Input::all();
         
         if(isset($input['id'])){
-            return Response::json(array('success'=>true,'data'=>Prijave::find((int)$input['id'])));
+            $data = json_decode(Prijave::find((int)$input['id']), true);
+            if(isset($data['data'])){
+                $data['data'] = json_decode($data['data'], true);
+            }
+            return new JsonResponse(array('success'=>true,'data'=>$data));
         }else if(isset($input['all'])){
-            return Response::json(array('success'=>true,'data'=>Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()));
+            $data = Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()->toArray();
+            foreach($data as &$entry){
+                if(isset($entry['data'])){
+                $entry['data'] = json_decode($entry['data'], true);
+            }
+            }
+            
+            return new JsonResponse(array('success'=>true,'data'=>$data));
         }
         
         
