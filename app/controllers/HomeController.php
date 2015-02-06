@@ -2,27 +2,27 @@
 
 class HomeController extends BaseController {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-        |       Route::get('/testme', 'HomeController@testme');
-	|
-	*/
+    public function Testme() {
 
-	public function showWelcome()
-	{
-          die('sdsadad');
-	}
-        
-        public function Testme(){
-            die('asdad');
+        $rules = array(
+            'data' => 'required',
+            'email' => 'required|email',
+            'status' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            echo Response::json(array('error'=>true,$validator->messages()));
+        }else{
+            $input = Input::all();
+            $prijaveModel = new Prijave;
+            $prijaveModel->status = $input['status'];
+            $prijaveModel->data = $input['data'];
+            $prijaveModel->email = $input['email'];
+            $prijaveModel->client_id = Authorizer::getResourceOwnerId();
+            var_dump($prijaveModel->save());
         }
+    }
 
 }
