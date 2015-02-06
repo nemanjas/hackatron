@@ -9,6 +9,7 @@ class HomeController extends BaseController {
             'email' => 'required|email',
             'status' => 'required'
         );
+       
 
         $validator = Validator::make(Input::all(), $rules);
 
@@ -17,7 +18,7 @@ class HomeController extends BaseController {
         }else{
             $input = Input::all();
             $prijaveModel = new Prijave;
-            $prijaveModel->status = $input['status'];
+            $prijaveModel->status = (int)$input['status'];
             $prijaveModel->data = $input['data'];
             $prijaveModel->email = $input['email'];
             $prijaveModel->client_id = Authorizer::getResourceOwnerId();
@@ -38,6 +39,33 @@ class HomeController extends BaseController {
         }
         
         
+    }
+    
+    
+    public function Update(){
+        $input = Input::all();
+        
+        if(isset($input['id'])){
+            $prijava = Prijave::find((int)$input['id']);
+            if($prijava == null){
+                echo Response::json(array('success'=>false,'data'=>'ID not found'));
+                exit;
+            }
+            if(isset($input['data'])){
+                $prijava->data = $input['data'];
+            }
+            if(isset($input['status'])){
+                $prijava->status = (int)$input['status'];
+            }
+            
+            if($prijava->save()){
+                echo Response::json(array('success'=>true,'data'=>$prijava));
+            }else{
+                echo Response::json(array('success'=>false,'data'=>'Unable to Update'));
+            }
+        }else{
+            echo Response::json(array('success'=>false,'data'=>'Please send ID'));
+        }
     }
 
 }
