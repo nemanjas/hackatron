@@ -35,7 +35,7 @@ Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
 
-Route::get('passmaker', function () { echo Hash::make('nemanjas'); });
+Route::get('passmaker', function () { echo Hash::make('rescentar'); });
 
 
 Route::get('admin/getall',  ['uses' => 'AdminController@getall']);

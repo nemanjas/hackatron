@@ -5,7 +5,7 @@
 	<title>Admin</title>
     <script type="text/javascript">
         base_url = '<?php echo URL::to('/')?>';
-        
+        action ='login';
         
     </script>
 	<!-- CSS -->
