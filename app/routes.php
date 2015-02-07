@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', function () { return View::make('hello'); });
 
+
+Route::get('admin/index',  ['uses' => 'AdminController@index']);
+
+
+Route::post('authenticate', ['uses' => 'AdminController@authenticate']);
 
 Route::post('insert', ['before' => 'oauth','uses' => 'HomeController@Insert']);
 
@@ -26,6 +28,11 @@ Route::get('get', ['before' => 'oauth','uses' => 'HomeController@GetData']);
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
+
+Route::get('passmaker', function () { echo Hash::make('nemanjas'); });
+
+
+Route::get('admin/getall',  ['uses' => 'AdminController@getall']);
 
 
 
