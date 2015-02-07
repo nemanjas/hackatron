@@ -29,9 +29,9 @@ angular.module('adminService', [])
                         status : function(id,status) {
 				return $http({
 					method: 'POST',
-					url: 'admin/update',
+					url: base_url+'/admin/update',
 					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-					data: {id:id,status:status}
+					data: $.param({id:id,status:status})
 				});
 			},
                         get : function() {

@@ -16,6 +16,8 @@ Route::get('/', function () { return View::make('hello'); });
 
 Route::get('admin/index',  ['uses' => 'AdminController@index']);
 
+Route::post('admin/update',  ['uses' => 'AdminController@update']);
+
 
 Route::post('authenticate', ['uses' => 'AdminController@authenticate']);
 

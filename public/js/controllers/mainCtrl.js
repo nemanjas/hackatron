@@ -7,17 +7,21 @@ angular.module('mainCtrl', [])
 
 		// loading variable to show the spinning loading icon
 		$scope.loading = true;
+               
 		
 		// get all the comments first and bind it to the $scope.comments object
 		Admin.get()
 			.success(function(data) {
                          
 				$scope.comments = data.data;
+                               // $scope.status = $scope.statuses[$scope.comments.status] ;
 				$scope.loading = false;
 			});
 
 
-$scope.statuses = [{id:0,name:'primljeno'},{id:1,name:'poslato'},{id:2,name:'reseno'}]; 
+                $scope.statuses = [{id:'0',name:'primljeno'},{id:'1',name:'poslato'},{id:'2',name:'reseno'}]; 
+                
+                
 
 		// function to handle submitting the form
 		$scope.login = function(loginData) {
@@ -54,13 +58,19 @@ $scope.statuses = [{id:0,name:'primljeno'},{id:1,name:'poslato'},{id:2,name:'res
 
 				});
 		};
+             
                 
                 	$scope.changeStatus = function(id,status) {
 			$scope.loading = true; 
-
+                        console.log(status);
 			Admin.status(id,status)
 				.success(function(data) {
+                                    Admin.get()
+                                        .success(function(data) {
 
+                                                $scope.comments = data.data;
+                                                $scope.loading = false;
+                                        });
 
 				});
 		};

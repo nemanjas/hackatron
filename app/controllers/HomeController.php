@@ -56,7 +56,7 @@ class HomeController extends BaseController {
     
     public function Update(){
         $input = Input::all();
-        
+        var_dump($input);
         if(isset($input['id'])){
             $prijava = Prijave::find((int)$input['id']);
             if($prijava == null){

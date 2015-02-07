@@ -44,5 +44,27 @@ class AdminController extends BaseController {
         }
     }
     
+    function update(){
+          if(Auth::user()->id > 0){
+             $input = Input::all();
+               $prijava = Prijave::find((int)$input['id']);
+                if($prijava == null){
+                    return Response::json(array('success'=>false,'data'=>'ID not found'));
+                    exit;
+                }
+                if(isset($input['status'])){
+                    $prijava->status = (int)$input['status'];
+                }
+
+                if($prijava->save()){
+                    return Response::json(array('success'=>true,'data'=>$prijava));
+                }else{
+                    return Response::json(array('success'=>false,'data'=>'Unable to Update'));
+                }
+        }else{
+            die();
+        }
+    }
+    
     
 }

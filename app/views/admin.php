@@ -32,15 +32,20 @@
 <!-- declare our angular app and controller -->
 <body class="container" ng-app="adminApp" ng-controller="mainController">
     <div class="comment" ng-hide="loading" ng-repeat="comment in comments">
+             <a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Obrisi</a>
+                <div class="pull-right">
+                    <label>Status</label><br/>
+                    <select   name="status" ng-model="comment.status" value="{{comment.status}}"  ng-change="changeStatus(comment.id,comment.status)" ng-options="status.id as status.name for status in statuses">
+                        
+                    </select>
+                </div>
 		<h3>Email {{ comment.email }}</h3>
 		<p>{{ comment.data.description }}</p>
 
-		<p><a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Obrisi</a>
-                    <label>Status</label>
-                    <select class="right"  name="status" ng-model="status" ng-change="changeStatus(comment.id,$(this).val())" ng-options="status.id as status.name for status in statuses">
-                        
-                    </select>
+		<p>
+               
                 </p>
+                <hr>
 	</div>
 </body>
 </html>
