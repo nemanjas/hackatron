@@ -40,7 +40,7 @@ class AdminController extends BaseController {
             }
             return new JsonResponse(array('success'=>true,'data'=>$data));
         }else{
-            die();
+            return Redirect::to('/');
         }
     }
     
@@ -62,8 +62,24 @@ class AdminController extends BaseController {
                     return Response::json(array('success'=>false,'data'=>'Unable to Update'));
                 }
         }else{
-            die();
+            return Redirect::to('/');
         }
+    }
+    
+    function delete(){
+        if(Auth::user()->id > 0){
+             $input = Input::all();
+               $prijava = Prijave::find((int)$input['id']);
+                if($prijava == null){
+                    return Response::json(array('success'=>false,'data'=>'ID not found'));
+                    exit;
+                }
+               echo $prijava->delete();
+              
+        }else{
+            return Redirect::to('/');    
+        }
+        
     }
     
     

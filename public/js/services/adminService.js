@@ -23,7 +23,12 @@ angular.module('adminService', [])
 				});
 			},
 			destroy : function(id) {
-				return $http.delete('api/comments/' + id);
+				return $http({
+					method: 'POST',
+					url: base_url+'/admin/delete',
+					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+					data: $.param({id:id})
+				});
 			},
                         
                         status : function(id,status) {

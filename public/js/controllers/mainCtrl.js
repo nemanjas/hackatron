@@ -46,15 +46,16 @@ angular.module('mainCtrl', [])
 		$scope.deleteComment = function(id) {
 			$scope.loading = true; 
 
-			Comment.destroy(id)
+			Admin.destroy(id)
 				.success(function(data) {
 
 					// if successful, we'll need to refresh the comment list
-					Comment.get()
-						.success(function(getData) {
-							$scope.comments = getData;
-							$scope.loading = false;
-						});
+					 Admin.get()
+                                        .success(function(data) {
+
+                                                $scope.comments = data.data;
+                                                $scope.loading = false;
+                                        });
 
 				});
 		};
