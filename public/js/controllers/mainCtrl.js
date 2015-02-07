@@ -17,6 +17,10 @@ angular.module('mainCtrl', [])
 				$scope.comments = data.data;
                                // $scope.status = $scope.statuses[$scope.comments.status] ;
 				$scope.loading = false;
+
+				for(var i =0; i< $scope.comments.length;i++){
+					$scope.comments[i].decodedImage = $scope.convertToBase64($scope.comments[i].image);
+				}
 			});
                     }else{
                         
@@ -86,4 +90,15 @@ angular.module('mainCtrl', [])
 				});
 		};
 
+		$scope.convertToBase64 = function(byteString){
+
+			var byteArray = JSON.parse(byteString);
+			var len = byteArray.length;
+			var baseImage = new Array(len);
+			for(var i = 0; i<len; i++){
+				baseImage[i] = String.fromCharCode(byteArray[i] & 0xff);
+			}
+
+			return baseImage;
+		}
 	})
