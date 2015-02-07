@@ -82,5 +82,27 @@ class AdminController extends BaseController {
         
     }
     
+    function podesavanja(){
+         if(Auth::user()->id > 0){
+            return View::make('podesavanja');
+        }else{
+           return Redirect::to('/');
+        }
+    }
+    
+    function getpodesavanja(){
+        if(Auth::user()->id > 0){
+            $data = Podesavanja::where('client_id', '=', Auth::user()->customer_id)->get()->toArray();
+                foreach($data as &$entry){
+                    if(isset($entry['categories'])){
+                    $entry['categories'] = json_decode($entry['categories'], true);
+                }
+            }
+            return new JsonResponse(array('success'=>true,'data'=>$data));
+        }else{
+            return Redirect::to('/');
+        }
+    }
+    
     
 }

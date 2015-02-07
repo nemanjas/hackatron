@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
+    
     <script type="text/javascript">
         base_url = '<?php echo URL::to('/')?>';
-        
+        action ='<?php echo Route::currentRouteAction()?>';
     </script>
 	<meta charset="UTF-8">
 	<title>Admin</title>
@@ -31,8 +32,21 @@
 </head>
 <!-- declare our angular app and controller -->
 <body class="container" ng-app="adminApp" ng-controller="mainController">
-    <div class="comment" ng-hide="loading" ng-repeat="comment in comments">
-             <a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Obrisi</a>
+        <nav class="nav nav-pills">
+        <li role="presentation" class="active">
+      <a href="<?php echo URL::to('admin/index')?>">
+       Prijave
+      </a>
+        </li>
+        <li role="presentation" >
+         <a  href="<?php echo URL::to('admin/podesavanja')?>">
+       Podesavanja
+      </a>
+        </li>
+
+</nav>
+    <div class="comment container" ng-hide="loading" ng-repeat="comment in comments" style="margin-top: 50px">
+             <a href="#" ng-click="deleteComment(comment.id)" class="btn btn-danger">Obrisi</a>
                 <div class="pull-right">
                     <label>Status</label><br/>
                     <select   name="status" ng-model="comment.status" value="{{comment.status}}"  ng-change="changeStatus(comment.id,comment.status)" ng-options="status.id as status.name for status in statuses">

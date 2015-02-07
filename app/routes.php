@@ -29,6 +29,8 @@ Route::post('update', ['before' => 'oauth','uses' => 'HomeController@Update']);
 
 Route::get('get', ['before' => 'oauth','uses' => 'HomeController@GetData']);
 
+Route::get('admin/podesavanja', ['uses' => 'AdminController@podesavanja']);
+
 Route::post('oauth/access_token', function() {
     return Response::json(Authorizer::issueAccessToken());
 });
@@ -40,4 +42,4 @@ Route::get('admin/getall',  ['uses' => 'AdminController@getall']);
 
 
 
-
+Route::get('admin/getpodesavanja',  ['uses' => 'AdminController@getpodesavanja']);

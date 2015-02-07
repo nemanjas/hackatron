@@ -42,6 +42,9 @@ angular.module('adminService', [])
                         get : function() {
 				return $http.get(base_url+'/admin/getall');
 			},
+                        getpodesavanja : function() {
+				return $http.get(base_url+'/admin/getpodesavanja');
+			},
 		}
 
 	});

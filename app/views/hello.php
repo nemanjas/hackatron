@@ -6,6 +6,7 @@
     <script type="text/javascript">
         base_url = '<?php echo URL::to('/')?>';
         
+        
     </script>
 	<!-- CSS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> <!-- load bootstrap via cdn -->
