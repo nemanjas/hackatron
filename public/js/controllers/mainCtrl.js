@@ -19,7 +19,9 @@ angular.module('mainCtrl', [])
 				$scope.loading = false;
 
 				for(var i =0; i< $scope.comments.length;i++){
-					$scope.comments[i].decodedImage = $scope.convertToBase64($scope.comments[i].image);
+					if($scope.comments[i].image){
+						$scope.comments[i].decodedImage = $scope.convertToBase64($scope.comments[i].image);
+					}
 				}
 			});
                     }else{
