@@ -48,7 +48,12 @@ class HomeController extends BaseController {
            }
             foreach($data as &$entry){
                 if(isset($entry['data'])){
-                $entry['data'] = json_decode($entry['data'], true);
+                    if(isset($input['nodata'])){
+                        unset($entry['data']);
+                    }else{
+                        $entry['data'] = json_decode($entry['data'], true);
+                    }
+                        
             }
             }
             
