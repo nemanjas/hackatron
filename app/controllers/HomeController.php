@@ -40,7 +40,12 @@ class HomeController extends BaseController {
             }
             return new JsonResponse(array('success'=>true,'data'=>$data));
         }else if(isset($input['all'])){
-            $data = Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()->toArray();
+           if(isset($input['email'])){
+                $data = Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->where('email', '=', $input['email'])->get()->toArray();
+           }else{
+                   
+                $data = Prijave::where('client_id', '=', Authorizer::getResourceOwnerId())->get()->toArray();
+           }
             foreach($data as &$entry){
                 if(isset($entry['data'])){
                 $entry['data'] = json_decode($entry['data'], true);
